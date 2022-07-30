@@ -11,7 +11,7 @@ time.sleep(5) #has to sleep or else it will try to find customer buttons before 
 
 def settingChange(num): 
 
-    xpth = 
+    xpth = asdf
 
     butt = browser.find_element()
 
@@ -37,41 +37,38 @@ def settingChange(num):
     #time.sleep(2)
 
 
-def script():
 
-    page = 28
+page = 28
 
-    #for each page of customers
-    while page < 29:
+#for each page of customers
+while page < 29:
 
-        
-        if (page == 28):
-            for i in range(1, 7):
-                settingChange(i)
-                time.sleep(2)
-                browser.get('')
-                time.sleep(3)
-                for b in range (page-1): 
-                    
-                    browser.find_element(By.LINK_TEXT, '').click()
-                    
-            page += 1
-
-        else:
-            
-            i = 1
-            while i < 11:
-                settingChange(i)
-                browser.get('')
-                time.sleep(2)
-        
-                for b in range (page-1): 
-                    browser.find_element(By.LINK_TEXT, '').click()
-                    
-                i += 1
-
-            page +=1
-            browser.find_element(By.LINK_TEXT, '').click()
+    
+    if (page == 28):
+        for i in range(1, 7):
+            settingChange(i)
             time.sleep(2)
+            browser.get('')
+            time.sleep(3)
+            for b in range (page-1): 
+                
+                browser.find_element(By.LINK_TEXT, '').click()
+                
+        page += 1
 
-script()
+    else:
+        
+        i = 1
+        while i < 11:
+            settingChange(i)
+            browser.get('')
+            time.sleep(2)
+    
+            for b in range (page-1): 
+                browser.find_element(By.LINK_TEXT, '').click()
+                
+            i += 1
+
+        page +=1
+        browser.find_element(By.LINK_TEXT, '').click()
+        time.sleep(2)

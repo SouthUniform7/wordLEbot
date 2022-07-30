@@ -6,17 +6,20 @@ from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
-browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+options = webdriver.ChromeOptions()
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
+
+browser = webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
 
 browser.get('https://www.nytimes.com/games/wordle/index.html')
 
 time.sleep(5)
 
-xButton = browser.find_element(By.XPATH, '/html/body/div/div[3]/div/div/svg')
+#xButton = browser.find_element(By.XPATH, '/html/body/div/div[3]/div/div/svg')
 
-xButton.click()
+#xButton.click()
 
-time.sleep(15)
+#time.sleep(15)
 
 action = ActionChains(browser)
 
@@ -24,7 +27,7 @@ action.send_keys("shits")
 
 
 
-time.sleep(100) #has to sleep or else it will try to find customer buttons before site loads 
+#time.sleep(100) #has to sleep or else it will try to find customer buttons before site loads 
 
 def solve(num): 
 
@@ -111,4 +114,4 @@ def script():
         #     browser.find_element(By.LINK_TEXT, '').click()
         #     time.sleep(2)
 
-script()
+#script()

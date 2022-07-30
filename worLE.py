@@ -4,6 +4,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.keys import Keys
 import time
 
 options = webdriver.ChromeOptions()
@@ -13,17 +14,21 @@ browser = webdriver.Chrome(options=options, service=Service(ChromeDriverManager(
 
 browser.get('https://www.nytimes.com/games/wordle/index.html')
 
-time.sleep(5)
+time.sleep(2)
 
-#xButton = browser.find_element(By.XPATH, '/html/body/div/div[3]/div/div/svg')
+xButton = browser.find_element(By.XPATH, '/html/body/div/div[3]/div/div')
 
-#xButton.click()
+xButton.click()
 
-#time.sleep(15)
+time.sleep(1)
 
-action = ActionChains(browser)
+ActionChains(browser) \
+    .send_keys('shits') \
+    .key_down(Keys.ENTER) \
+    .key_up(Keys.ENTER) \
+    .perform()
 
-action.send_keys("shits")
+
 
 
 

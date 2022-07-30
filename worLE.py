@@ -1,17 +1,33 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 browser = webdriver.Chrome(ChromeDriverManager().install())
 
+browser.get('https://www.nytimes.com/games/wordle/index.html')
 
-time.sleep(5) #has to sleep or else it will try to find customer buttons before site loads 
+time.sleep(5)
 
-def settingChange(num): 
+xButton = browser.find_element(By.XPATH, '/html/body/div/div[3]/div/div/svg')
 
-    xpth = asdf
+xButton.click()
+
+time.sleep(15)
+
+action = ActionChains(browser)
+
+action.send_keys("shits")
+
+
+
+time.sleep(100) #has to sleep or else it will try to find customer buttons before site loads 
+
+def solve(num): 
+
+    #html/body/whole site/board container/whole board/single row/single letter box
 
     butt = browser.find_element()
 
@@ -37,38 +53,61 @@ def settingChange(num):
     #time.sleep(2)
 
 
+    #for each page of customers
 
-page = 28
 
-#for each page of customers
-while page < 29:
-
+def script():
     
-    if (page == 28):
-        for i in range(1, 7):
-            settingChange(i)
-            time.sleep(2)
-            browser.get('')
-            time.sleep(3)
-            for b in range (page-1): 
-                
-                browser.find_element(By.LINK_TEXT, '').click()
-                
-        page += 1
+    #path only needed to check letter correctness
 
-    else:
+    #html/body/whole site/board container/whole board/single row/single letter box
+
+    xbase = '/html/body/div/div[1]/div/div[row]'
+    
+    rowpath = By.XPATH('/html/body/div/div[1]/div/div[]')
+
+    for row in range(1,7):   
+        rowpathstring = xbase.replace('row', row)
+
+        rowpath = By.XPATH(rowpathstring)
+
+        letterstring = ''
+
+        letterbox = By.XPATH()
+
+
+
+
+
+
+
+        # if (page == 28):
+        #     for i in range(1, 7):
+        #         settingChange(i)
+        #         time.sleep(2)
+        #         browser.get('')
+        #         time.sleep(3)
+        #         for b in range (page-1): 
+                    
+        #             browser.find_element(By.LINK_TEXT, '').click()
+                    
+        #     page += 1
+
+        # else:
+            
+        #     i = 1
+        #     while i < 11:
+        #         settingChange(i)
+        #         browser.get('')
+        #         time.sleep(2)
         
-        i = 1
-        while i < 11:
-            settingChange(i)
-            browser.get('')
-            time.sleep(2)
-    
-            for b in range (page-1): 
-                browser.find_element(By.LINK_TEXT, '').click()
-                
-            i += 1
+        #         for b in range (page-1): 
+        #             browser.find_element(By.LINK_TEXT, '').click()
+                    
+        #         i += 1
 
-        page +=1
-        browser.find_element(By.LINK_TEXT, '').click()
-        time.sleep(2)
+        #     page +=1
+        #     browser.find_element(By.LINK_TEXT, '').click()
+        #     time.sleep(2)
+
+script()

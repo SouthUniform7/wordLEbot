@@ -38,10 +38,34 @@ def send_word(word):
 
     return
 
-def solve(row = 1): 
+def check(row): #eliminates absent letters from letters[], does nothing to correct letters, and returns a dictionary of 'present' letters with indexes
 
-    if (row > 6):
+    path = '/html/body/div/div[1]/div/div[' + str(row) + ']/div[BUTTON]/div'
+
+    present = {}
+
+
+    #checks data-state's of each letter
+    for i in range (0, 5):
+
+        buttonpath = path.replace('BUTTON', str(i+1)) #i+1 because html xpath div's are 1 indexed
+
+        state = browser.find_element(By.XPATH, buttonpath).get_attribute('data-state')
+
+        if state == 'absent':
+            letters[i] = '!'
+        elif state == 'present':
+            present[letters[i]] = i
+        elif state == 'correct':
+            continue
+            
+    return present
+
+def solve(row = 1): #will probably be done recursively,
+
+    if (row > 6): #base case, row will be incremented from 1 to 7 and at 7 will return
         print('bruh')
+        return
     else:
     
         #rowpath = By.XPATH(xbase.replace('row', str(row)))
@@ -55,12 +79,21 @@ def solve(row = 1):
 
         print(word_string)
         send_word(word_string)
+        present = check(row)
+        print(present)
         
         row+=1
 
         solve(row)
         
     
+
+
+
+
+
+
+
 
 
 def script():

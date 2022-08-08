@@ -60,7 +60,7 @@ def check(row): #eliminates absent letters from letters[], does nothing to corre
         elif state == 'correct':
             continue #temp
             
-    return 
+    #return 
 
 def solve(row = 1): #will probably be done recursively,
 

@@ -6,6 +6,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import time
+import worle_solver
 
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -20,7 +21,10 @@ browser = webdriver.Chrome(options=options, service=Service(ChromeDriverManager(
 #   G   G    L       O    O   B    B   A    A   L
 #   GGGGG   LLLLLL  OOOO    BBBBB   A     A   LLLLLL
 ###########################################################
-letters = ['s', 't', 'r', 'a', 'y']
+
+tron = worle_solver.solver()
+
+#       [*tron.getGuess()]
 
 xbase = '/html/body/div/div[1]/div/div[row]'
 
@@ -42,9 +46,6 @@ def check(row): #eliminates absent letters from letters[], does nothing to corre
 
     path = '/html/body/div/div[1]/div/div[' + str(row) + ']/div[BUTTON]/div'
 
-    present = {}
-
-
     #checks data-state's of each letter
     for i in range (0, 5):
 
@@ -53,13 +54,13 @@ def check(row): #eliminates absent letters from letters[], does nothing to corre
         state = browser.find_element(By.XPATH, buttonpath).get_attribute('data-state')
 
         if state == 'absent':
-            letters[i] = '!'
+            tron.setGuess('tests')
         elif state == 'present':
-            present[letters[i]] = i
+            continue #temp
         elif state == 'correct':
-            continue
+            continue #temp
             
-    return present
+    return 
 
 def solve(row = 1): #will probably be done recursively,
 
@@ -74,13 +75,14 @@ def solve(row = 1): #will probably be done recursively,
 
 
         #because for some reason python string .join(letters) was returning blank
-        for i in letters: 
-            word_string += i
+        #for i in [*tron.getGuess()]: 
+        #    word_string += i
 
-        print(word_string)
-        send_word(word_string)
-        present = check(row)
-        print(present)
+        print(tron.getGuess())
+        send_word(tron.getGuess())
+        #present = check(row)
+        #print(present)
+        check(row)
         
         row+=1
 
